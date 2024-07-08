@@ -1,6 +1,6 @@
 {
   "name": "react-native-instyled",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "simple react-native styling library",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
