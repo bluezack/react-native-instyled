@@ -133,7 +133,7 @@ You can create components with styles that change based on props:
 
 ```typescript
 const DynamicButton = instyled.TouchableOpacity<{ isActive: boolean }>(
-  ({ isActive, theme }) => ({
+  ({ props: {isActive}, theme }) => ({
     backgroundColor: isActive ? theme.colors.primary : theme.colors.secondary,
     padding: theme.spacing.medium,
   })
