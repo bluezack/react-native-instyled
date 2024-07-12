@@ -1,2 +1,2 @@
-export * from './components.types';
+export * from './style.types';
 export * from './theme.types';

@@ -1,11 +1,9 @@
-// @ts-nocheck
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react-native';
 import { Text } from 'react-native';
 import instyled, { ThemeProvider, useTheme } from '../index';
-import type { Theme } from '../types';
 
-const mockTheme: Theme = {
+const mockTheme = {
   colors: {
     primary: 'blue',
     secondary: 'green',
@@ -28,8 +26,6 @@ const mockTheme: Theme = {
 };
 
 describe('instyled components', () => {
-  // Existing tests...
-
   it('renders a styled TouchableOpacity component', () => {
     const StyledButton = instyled.TouchableOpacity({
       backgroundColor: 'yellow',
@@ -58,7 +54,7 @@ describe('instyled components', () => {
   });
 
   it('applies theme to a styled component', () => {
-    const ThemedText = instyled.Text(({ theme }) => ({
+    const ThemedText = instyled.Text(({ theme }: { theme: any }) => ({
       color: theme.colors.primary,
       fontSize: theme.typography.fontSize.medium,
     }));
@@ -112,7 +108,7 @@ describe('instyled components', () => {
 
   it('uses useTheme hook correctly', () => {
     const ThemedComponent = () => {
-      const theme = useTheme();
+      const theme: any = useTheme();
       return (
         <Text testID="themed-text" style={{ color: theme.colors.secondary }}>
           Themed Text

@@ -1,4 +1,4 @@
-import React, { type ComponentType } from 'react';
+import { type ComponentType } from 'react';
 import {
   View,
   Text,
@@ -9,7 +9,6 @@ import {
   type ViewStyle,
   type TextStyle,
   type ImageStyle,
-  type StyleProp,
   type ViewProps,
   type TextProps,
   type ImageProps,
@@ -17,44 +16,8 @@ import {
   type ScrollViewProps,
   type TextInputProps,
 } from 'react-native';
-import { useTheme } from './theme';
-import type { BaseStyle, StyleType, StyledComponentProps } from './types';
-
-const mergeStyles = (
-  baseStyle: StyleType,
-  additionalStyle?: StyleProp<StyleType>
-): StyleProp<StyleType> => {
-  if (Array.isArray(additionalStyle)) {
-    return [baseStyle, ...additionalStyle];
-  }
-  return { ...baseStyle, ...(additionalStyle as any) };
-};
-
-const createStyledComponent = <
-  StylingProps extends object,
-  ComponentProps extends Object = {},
->(
-  Component: ComponentType<ComponentProps>,
-  baseStyle: BaseStyle<StylingProps>
-) => {
-  return React.memo(
-    ({
-      style,
-      ...rest
-    }: StyledComponentProps<StylingProps, ComponentProps>) => {
-      const theme = useTheme();
-
-      const resolvedBaseStyle =
-        typeof baseStyle === 'function'
-          ? baseStyle({ theme, props: rest as StylingProps })
-          : baseStyle;
-
-      const mergedStyle = mergeStyles(resolvedBaseStyle, style);
-
-      return <Component style={mergedStyle} {...(rest as any)} />;
-    }
-  );
-};
+import type { BaseStyle } from './types';
+import { createStyledComponent } from './createStyledComponent';
 
 const instyled = {
   View: <StylingProps extends Object>(
